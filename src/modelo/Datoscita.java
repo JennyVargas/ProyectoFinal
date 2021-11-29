@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  *
- * @author jenny
+ * @author Jenny Vargas & Luis Espinoza
  * @version 25-11-2021
  */
 public class Datoscita {
