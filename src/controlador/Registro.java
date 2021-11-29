@@ -9,8 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 /**
  *
- * @author jenny
- * @version 25-11-2021
+ * @author Jenny Vargas & Luis Espinoza
+ * @version 28-11-2021
  */
 public class Registro {
     
