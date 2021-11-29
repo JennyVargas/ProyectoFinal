@@ -6,6 +6,7 @@ import modelo.Datoscita;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 /**
  *
  * @author jenny
@@ -89,6 +90,96 @@ public class Registro {
         }
     }
 
+
+    public boolean eliminar (int rut){
+        
+        
+        
+        try {
+            conexion con = new conexion();
+            Connection cnx = con.obtenerConexion();
+            
+           
+            
+             String query = "DELETE FROM datoscita WHERE rut = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            stmt.setInt(1, rut);
+            
+            stmt.executeUpdate();
+            stmt.close();
+            cnx.close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL al agregar Rut: " + e.getMessage());
+            return false;
+        } catch(Exception e){
+            System.out.println("Error al agregar Rut (EXCEPTION): " + e.getMessage());
+            return false;  
+        }
+    }
+
+    
+    public Datoscita buscarPorRut (int rut){
+        
+        Datoscita datoscita =  new Datoscita ();
+        
+        try {
+            conexion con = new conexion();
+            Connection cnx = con.obtenerConexion();
+            
+           
+            
+            String query = "SELECT rut, nombre,apellido,telefono,edad,prevision,doctor,especialidad,fecha,valor FROM datoscita WHERE rut = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            stmt.setInt(1, rut);
+            
+             ResultSet rs = stmt.executeQuery();
+             if (rs.next()) {
+                datoscita.setRut(rs.getInt("rut"));
+                datoscita.setNombre(rs.getString("Nombre"));
+                datoscita.setApellido(rs.getString("Apellido"));
+                datoscita.setTelefono(rs.getInt("Telefono"));
+                datoscita.setEdad(rs.getInt("Edad"));
+                datoscita.setPrevision(rs.getString("Prevision"));
+                datoscita.setDoctor(rs.getString("Doctor"));
+                datoscita.setEspecialidad(rs.getString("Especialidad"));
+                datoscita.setFecha(rs.getDate("Fecha"));
+                datoscita.setValor(rs.getInt("Valor"));
+            
+            
+            }
+            stmt.executeUpdate();
+            stmt.close();
+            cnx.close();
+
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL al agregar Rut: " + e.getMessage());
+            
+        } catch(Exception e){
+            System.out.println("Error al agregar Rut (EXCEPTION): " + e.getMessage());
+             
+        }
+        return datoscita;
+    }
+}
+
+   
+        
+        
+            
+           
+            
+           
+            
+            
+            
+
+            
+      
+        
     
 
 
